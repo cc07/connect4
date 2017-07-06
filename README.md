@@ -1,28 +1,25 @@
 # Connect4
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0-rc.1.
+This a game for 2 players who first earned 4 consecutive nodes won.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The game is hosted at https://connect4-99da5.firebaseapp.com/, it can be accessed from desktop, mobile or any device with modern internet browser.
+However, it could also be served standalone by cloning the dist folder in this repo (https://github.com/cc07/connect4).
 
-## Code scaffolding
+## Technical structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+This project builded with Angular4, which is a popular JavaScript framework supported by Google. It works across any platform those support modern JavaScript.
+The game is primarily processed by the app.component in all aspects, and with a simple computer AI for single player as a service in xavier.service.
 
-## Build
+## Operation flow
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+The main app.component will first create the game board, and wait for user input. Either the user choose 1 player or 2 players, the starting player will be randomly chose for the first round and the previous loser later on. As if the AI move first, it will compulsory to take the middle of the first row in order to take the first mover advantage. The game will finish whenever any player have a consecutive 4 nodes or all nodes in the board were filled.
 
-## Running unit tests
+## Advance AI
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Currently, the AI will take the highest point node computed for his round. And for further, it could compute the node value for the next user move, in order to minimize the user's gain.
 
-## Running end-to-end tests
+## Other projects
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Recently, i do have two other projects also builded with Angular4. https://appetit.hk as a F&B platform and a http://vinum.life for a simple social platform for wine lover.

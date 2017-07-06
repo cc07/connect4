@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
     colSize: number;
     frameSize: number;
     actualFrameSize: number;
+    framePadding: number;
     startX: number;
     radius: number;
     
@@ -94,10 +95,11 @@ export class AppComponent implements OnInit {
     
     computeSize() {
                 
-        this.frameSize = window.innerWidth * 0.8; 
+        this.frameSize = Math.min(window.innerWidth * 0.8, window.innerHeight * 0.8); 
         this.actualFrameSize = this.frameSize * 0.9;
         this.colSize = this.actualFrameSize / 7;     
         this.startX = (this.frameSize - this.actualFrameSize) / 2;                 
+        this.framePadding = (window.innerWidth - this.frameSize) / 2;
         
         this.bgCanvas.nativeElement.height = this.frameSize;
         this.bgCanvas.nativeElement.width = this.frameSize;                
@@ -236,8 +238,7 @@ export class AppComponent implements OnInit {
     }        
     
     async postDrop(row: number, col: number) {
-        
-        this.printBoard();
+                
         this.setOccupied(row, col);
         this.isGameEnded = await this.checkEndGame(row, col);               
         
@@ -277,6 +278,7 @@ export class AppComponent implements OnInit {
                 this.checkSouthEast(row, col, this.board),
                 this.checkNorthWest(row, col, this.board),
                 this.checkNorthEast(row, col, this.board),
+                this.checkHorizon(row, col, this.board),
                 this.checkLeftSkewed(row, col, this.board),
                 this.checkRightSkewed(row, col, this.board)
                 
@@ -287,12 +289,6 @@ export class AppComponent implements OnInit {
                     
                     let pattern = new Array(4).fill(this.turnPlayer).join(',').replace(new RegExp('-1', 'g'), 'A');
                     let check = bar.cells.join(',').replace(new RegExp('-1', 'g'), 'A');
-                    
-                    if (bar.direction == 'ls' || bar.direction == 'rs') {
-                        console.log(bar);
-                        console.log('check', check);
-                        console.log('pattern', pattern);                        
-                    }
                     
                     if (check.includes(pattern)) {
                         resolve(true);
@@ -402,6 +398,29 @@ export class AppComponent implements OnInit {
         });                
     }    
     
+    checkHorizon(row: number, col: number, board: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            
+            let cells = [];
+            let shadowCells = [];
+            let shadowCol = +col + 1;
+            
+            while (col >= 0) {
+                cells.push(board[row][col]);
+                
+                col--;
+            }
+            
+            while (shadowCol < this.config.colCount) {
+                shadowCells.push(board[row][shadowCol]);
+                
+                shadowCol++;
+            }
+            resolve({ direction: 'hr', cells: cells.reverse().concat(shadowCells) });
+        });        
+        
+    }
+    
     checkLeftSkewed(row: number, col: number, board: any): Promise<any> {
         return new Promise((resolve, reject) => {
             
@@ -467,7 +486,7 @@ export class AppComponent implements OnInit {
     }           
     
     getPointingCol(event: any): number {
-        return Math.floor((event.x - this.startX) / this.colSize) - 1;
+        return Math.floor((event.x - this.startX - this.framePadding) / this.colSize);
     }    
     
     getAvailableRow(col: number): number {        
