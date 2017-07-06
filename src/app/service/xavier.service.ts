@@ -81,7 +81,8 @@ export class XavierService {
                 this.game.checkNorthWest(row, col, this.game.board),
                 this.game.checkNorthEast(row, col, this.game.board),
                 this.game.checkLeftSkewed(row, col, this.game.board),
-                this.game.checkRightSkewed(row, col, this.game.board)
+                this.game.checkRightSkewed(row, col, this.game.board),
+                this.game.checkHorizon(row, col, this.game.board)
             ];
 
             return Promise.all(checking).then((result) => {
