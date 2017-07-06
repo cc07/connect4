@@ -1,0 +1,18 @@
+<div class="headerContainer" [class.blue]="turnPlayer==BLUE" [class.red]="turnPlayer==RED">
+    <div class="messageContainer">
+        <div *ngIf="isGameStarted; else showStartGameMessage">{{ message }}</div>    
+        <ng-template #showStartGameMessage>Select game mode to start</ng-template>
+    </div>
+    <div *ngIf="!isGameStarted; else showResetGame">
+        <button type="button" (click)="setGameMode(1)">1P</button><button type="button" (click)="setGameMode(2)">2P</button>
+    </div>    
+    <ng-template #showResetGame>
+        <button type="button" (click)="resetGame()">Reset</button>
+    </ng-template>
+</div>
+<div class="canvasContainer background" (window:resize)="onWindowResize()">
+    <canvas class="background" #backgroundCanvas height="100" width="100"></canvas>
+</div>
+<div class="canvasContainer">
+    <canvas #canvas height="100" width="100" (click)="onClick($event)" (mousemove)="onMousemove($event)"></canvas>
+</div>

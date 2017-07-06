@@ -1,0 +1,48 @@
+canvas {
+    height: 100%;
+    width: 100%;
+}
+
+.canvasContainer {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    padding: 40px;    
+    text-align: center;
+}
+
+.canvasContainer.background {
+    z-index: 0;
+}
+
+.headerContainer {
+    font-family: monospace;
+    font-size: 2em;
+    text-align: center;
+    padding: 20px 40px;    
+}
+
+.messageContainer {
+    margin-bottom: 5px;
+}
+
+.blue {
+    color: #0066FF;
+}
+
+.red {
+    color: #F44336;
+}
+
+button {
+    background: #FFF;
+    border: 1px solid #666;
+    border-radius: 3px;
+    color: #666;  
+    font-size: .5em;
+    margin-right: 5px;
+    padding: 7px 20px;    
+}

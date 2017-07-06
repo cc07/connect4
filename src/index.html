@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Vinum</title>
+        <base href="/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#cccccc">        
+        <link rel="icon" type="image/x-icon" href="favicon.ico"><style>
+            #splashScreenContainer {
+                background: #00BCD4;
+                display: flex;
+                flex-direction: column;
+                height: 100%;    
+                justify-content: center;    
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            #splashScreenContainer h1 {
+                color: #E0F7FA;
+                font-family: Courier New;
+                font-size: 3em !important;
+                font-weight: 500;
+                text-align: center;
+            }            
+        </style>    
+    </head>
+    <body>
+    <app-root>
+        <div id="splashScreenContainer">
+            <h1 id="logo">Connect4</h1>
+        </div>
+    </app-root>
+</body>
+</html>
